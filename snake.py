@@ -16,8 +16,8 @@ class Snake:
         self.body = [(self.x, self.y)]
         self.size = 3
 
-    def move(self, count, dificult):
-        if count % 10 in dificult:
+    def move(self, count, vel):
+        if count % 10 in vel:
             self.x_diff = self.x - self.food.x
             self.y_diff = self.y - self.food.y
             if abs(self.y_diff) > abs(self.x_diff):
@@ -52,9 +52,9 @@ class Snake:
         for self.x, self.y in self.body:
             pygame.draw.rect(self.screen, self.color, (self.x, self.y, 10, 10))
 
-    def grow(self, count):
-        if count % 150 == 0:
-            self.size += 5
+    def grow(self, count, size, time):
+        if count % time == 0:
+            self.size += 10
 
     def check_collision(self):
         if (abs(self.x_diff) == 0 and abs(self.y_diff) == 10):
