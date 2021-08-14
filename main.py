@@ -14,14 +14,31 @@ pygame.display.set_caption('Snake Game')
 
 count = 0
 
-# Dificulties
-easy = (0, 1, 3, 6, 7, 9)
-medium = (0, 1, 3, 4, 6, 7, 9)
-hard = (0, 2, 3, 4, 5, 6, 7, 9)
-expert = (0, 1, 2, 3, 4, 6, 7, 8, 9)
-insane = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+# Difficulties
 
-dificult = expert
+zen = {'vel': (0, 2, 4, 6, 8),
+       'size': 1,
+       'time': 60}
+easy = {'vel': (0, 1, 3, 6, 7, 9),
+        'size': 3,
+        'time': 30}
+medium = {'vel': (0, 1, 3, 4, 6, 7, 9),
+          'size': 5,
+          'time': 25}
+hard = {'vel': (0, 2, 3, 4, 5, 6, 7, 9),
+        'size': 7,
+        'time': 20}
+expert = {'vel': (0, 1, 2, 3, 4, 6, 7, 8, 9),
+          'size': 9,
+          'time': 15}
+insane = {'vel': (0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+          'size': 10,
+          'time': 10}
+
+difficulty = expert
+vel = difficulty['vel']
+size = difficulty['size']
+time = difficulty['time'] * 10
 
 # Velocity
 vel_food = 10
@@ -48,10 +65,12 @@ while not endgame:
                 exit()
 
     food.move(events, snake)
-    snake.move(count, dificult)
-    snake.grow(count)
+    snake.move(count, vel)
+    snake.grow(count, size, time)
+
     if snake.check_collision():
         endgame = True
+
     screen.fill(black)
     food.draw()
     snake.draw()
